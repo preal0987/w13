@@ -1,0 +1,27 @@
+clear; clc;
+
+measure = 25 + 0.8*randn(10000, 30);
+
+avgMeasure = mean(measure, 2);
+
+success = (avgMeasure >= 24.7) & (avgMeasure <= 25.3);
+
+probability = sum(success) / 10000;
+disp('Estimated Probability =');
+disp(probability);
+
+figure;
+
+subplot(2,1,1);
+histogram(measure(:,1));
+xlabel('Temperature');
+ylabel('Count');
+title('Single Sensor Measurement');
+grid on;
+
+subplot(2,1,2);
+histogram(avgMeasure);
+xlabel('Average Temperature');
+ylabel('Count');
+title('Average of 30 Sensors');
+grid on;
