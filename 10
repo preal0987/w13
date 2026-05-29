@@ -1,0 +1,30 @@
+clear; clc;
+
+rng(1);
+
+n = 10000;
+
+serverLoad = 35 * randn(n,1);
+
+overload = rand(n,1) < 0.12;
+
+power = 500 + serverLoad + 120*overload;
+
+ratio = sum(power > 650) / n;
+disp('Ratio of days with power > 650 =');
+disp(ratio);
+
+figure;
+histogram(power);
+xlabel('Daily Power Usage');
+ylabel('Frequency');
+title('Histogram of Daily Power Usage');
+grid on;
+
+meanOverload = mean(power(overload));
+disp('Mean power on overload days =');
+disp(meanOverload);
+
+meanNormal = mean(power(~overload));
+disp('Mean power on non-overload days =');
+disp(meanNormal);
